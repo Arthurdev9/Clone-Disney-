@@ -8,6 +8,11 @@ function scripts() {
         .pipe(gulp.dest('./dist/js'))
 }
 
+function html() {
+    return gulp.src('./src/*.html')
+        .pipe(gulp.dest('./dist'));
+}
+
 async function images() {
     const imagemin = (await import('gulp-imagemin')).default;
     return gulp.src('./src/images/**/*')
@@ -23,7 +28,7 @@ function styles() {
         .pipe(gulp.dest('./dist/css'));
 }
 
-exports.default = gulp.parallel(styles, images, scripts);
+exports.default = gulp.parallel(styles, images, scripts, html);
 
 exports.watch = function() {
     gulp.watch('./src/styles/*.scss', gulp.parallel(styles));
